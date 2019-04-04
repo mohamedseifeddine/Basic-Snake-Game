@@ -57,10 +57,11 @@ function add() {
   if (direction == "UP") {
     snake.push({ x: lastball.x, y: lastball.y - 20 });
   }
-} 
+}
 
 // How the snake eat the food
-function eatFood(){
+
+function eatFood() {
   var lastball = snake[snake.length - 1];
   if (lastball.x == food.x * 20 && lastball.y == food.y * 20) {
     score++;
@@ -74,6 +75,7 @@ function game() {
   snake.shift();
   add();
   eatFood();
+  var lastball = snake[snake.length - 1];
 
   for (var i = 0; i < snake.length; i++) {
     ball = snake[i];
@@ -96,6 +98,13 @@ function game() {
     if (ball.y < 0) {
       ball.y = 480;
     }
+    // Game-Over Conditions
+
+    if (lastball.x == ball.x && lastball.y == ball.y && i < snake.length - 2) {
+      alert(" Game Over  Try again " + score);
+      init();
+    }
+
     // draw the snake
 
     ctx.fillRect(ball.x, ball.y, 19, 19);
@@ -103,6 +112,12 @@ function game() {
   // draw the food
 
   ctx.fillRect(food.x * 20, food.y * 20, 19, 19);
+
+  // Current Score
+
+  ctx.fillStyle = "black";
+  ctx.font = "20px Changa one";
+  ctx.fillText(" Your Score : " + score, 60, 500);
 }
 // start the game
 
