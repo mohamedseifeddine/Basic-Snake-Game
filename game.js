@@ -5,6 +5,29 @@ var highscore = document.getElementById("highscore");
 var ctx = canvas.getContext("2d");
 var direction , snake , score 
 
+
+// Create  Snake Direction
+
+document.addEventListener("keydown", direction);
+
+function direction(event) {
+  let key = event.keyCode;
+  if (key == 37 && direction != "RIGHT") {
+    direction = "LEFT";
+  } else if (key == 38 && direction != "DOWN") {
+    direction = "UP";
+  } else if (key == 39 && direction != "LEFT") {
+    direction = "RIGHT";
+  } else if (key == 40 && direction != "UP") {
+    direction = "DOWN";
+  }
+}
+
+
+
+
+
+
 // initialize the game
 
 function init() {
@@ -16,8 +39,33 @@ function init() {
 
 init();
 
-function game() {
-  ctx.clearRect(0, 0, 888, 555);
+// Create  Snake Movement
+
+function add() {
+  var lastball = snake[snake.length - 1];
+  if (direction == "RIGHT") {
+    snake.push({ x: lastball.x + 20, y: lastball.y });
+  }
+  if (direction == "DOWN") {
+    snake.push({ x: lastball.x, y: lastball.y + 20 });
+  }
+  if (direction == "LEFT") {
+    snake.push({ x: lastball.x - 20, y: lastball.y });
+  }
+
+  if (direction == "UP") {
+    snake.push({ x: lastball.x, y: lastball.y - 20 });
+  }
+}
+ 
+
+
+
+function game() { 
+ctx.clearRect(0, 0, 888, 555);
+snake.shift();
+add();
+ 
   for (var i = 0; i < snake.length; i++) {
     ball = snake[i];
     if (i == snake.length - 1) {
@@ -27,8 +75,22 @@ function game() {
     }
  ctx.fillRect(ball.x, ball.y, 19, 19);
   }
+  if (ball.x > 780) {
+    ball.x = 0;
+  }
+
+  if (ball.x < 0) {
+    ball.x = 780;
+  }
+  if (ball.y > 480) {
+    ball.y = 0;
+  }
+  if (ball.y < 0) {
+    ball.y = 480;
+  }
  
   
 }
 
- game();
+setInterval(game,250) 
+
