@@ -6,6 +6,24 @@ var ctx = canvas.getContext("2d");
 var direction, snake, score, food; 
 let allScore = [];
 
+
+// load audio files
+
+let dead = new Audio();
+let eat = new Audio();
+let up = new Audio();
+let right = new Audio();
+let left = new Audio();
+let down = new Audio();
+
+dead.src = "audio/dead.mp3";
+eat.src = "audio/eat.mp3";
+up.src = "audio/up.mp3";
+right.src = "audio/right.mp3";
+left.src = "audio/left.mp3";
+down.src = "audio/down.mp3";
+
+
 // listen to keyboard events to move the snake
 
 document.addEventListener("keydown", direction);
@@ -14,12 +32,16 @@ function direction(event) {
   let key = event.keyCode;
   if (key == 37 && direction != "RIGHT") {
     direction = "LEFT";
+    left.play();
   } else if (key == 38 && direction != "DOWN") {
     direction = "UP";
+    up.play();
   } else if (key == 39 && direction != "LEFT") {
     direction = "RIGHT";
+    right.play();
   } else if (key == 40 && direction != "UP") {
     direction = "DOWN";
+    down.play();
   }
 }
 
@@ -65,6 +87,7 @@ function add() {
 function eatFood() {
   var lastball = snake[snake.length - 1];
   if (lastball.x == food.x * 20 && lastball.y == food.y * 20) {
+    eat.play()
     score++;
     add();
     createFood();
@@ -102,6 +125,7 @@ function game() {
     // Game-Over Conditions
 
     if (lastball.x == ball.x && lastball.y == ball.y && i < snake.length - 2) {
+      dead.play()
       alert(" Game Over  Try again " + score);
 
        // Calculate The High Score
@@ -132,4 +156,4 @@ function game() {
 }
 // start the game
 
-setInterval(game, 250);
+setInterval(game, 50);
