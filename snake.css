@@ -1,0 +1,30 @@
+#interface{
+display: flex;
+width: 1200px;
+margin-top: 60px;
+justify-content: center;
+background-image: url("/images/background-greywhite.jpg");
+
+}
+#myCanvas {
+  background-image: url("/images/background.jpeg");
+ 
+}
+#highscore {
+  text-decoration-color: blue;
+  text-align: center;
+  font-size: 30px;
+  
+}
+fieldset {
+  width: 200px;
+  height: 50px;
+  margin-top: 40px;
+  margin-right: 55px;
+
+}
+legend {
+  color: red;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
