@@ -3,7 +3,8 @@
 var canvas = document.getElementById("myCanvas");
 var highscore = document.getElementById("highscore");
 var ctx = canvas.getContext("2d");
-var direction, snake, score, food;
+var direction, snake, score, food; 
+let allScore = [];
 
 // listen to keyboard events to move the snake
 
@@ -102,6 +103,16 @@ function game() {
 
     if (lastball.x == ball.x && lastball.y == ball.y && i < snake.length - 2) {
       alert(" Game Over  Try again " + score);
+
+       // Calculate The High Score
+
+      localStorage.setItem("score", score);
+      var currentScore = Math.max([localStorage].map(x => x.score));
+      allScore.push(currentScore);
+      let bestScore = Math.max(...allScore);
+      localStorage.setItem("bestscore", bestScore);
+
+      highscore.innerHTML = ` ${bestScore} `;
       init();
     }
 
