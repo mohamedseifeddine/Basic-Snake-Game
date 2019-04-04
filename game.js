@@ -3,8 +3,7 @@
 var canvas = document.getElementById("myCanvas");
 var highscore = document.getElementById("highscore");
 var ctx = canvas.getContext("2d");
-var direction , snake , score 
-
+var direction, snake, score, food;
 
 // Create  Snake Direction
 
@@ -23,18 +22,20 @@ function direction(event) {
   }
 }
 
-
-
-
-
-
 // initialize the game
 
 function init() {
   direction = "RIGHT";
   score = 0;
   snake = [{ x: 40, y: 40 }, { x: 60, y: 40 }, { x: 80, y: 40 }];
-
+  createFood();
+}
+// create food
+function createFood() {
+  food = {
+    x: Math.floor(Math.random() * 39),
+    y: Math.floor(Math.random() * 24)
+  };
 }
 
 init();
@@ -57,15 +58,12 @@ function add() {
     snake.push({ x: lastball.x, y: lastball.y - 20 });
   }
 }
- 
 
+function game() {
+  ctx.clearRect(0, 0, 888, 555);
+  snake.shift();
+  add();
 
-
-function game() { 
-ctx.clearRect(0, 0, 888, 555);
-snake.shift();
-add();
- 
   for (var i = 0; i < snake.length; i++) {
     ball = snake[i];
     if (i == snake.length - 1) {
@@ -73,24 +71,27 @@ add();
     } else {
       ctx.fillStyle = "#ff0000";
     }
- ctx.fillRect(ball.x, ball.y, 19, 19);
-  }
-  if (ball.x > 780) {
-    ball.x = 0;
-  }
 
-  if (ball.x < 0) {
-    ball.x = 780;
+    if (ball.x > 780) {
+      ball.x = 0;
+    }
+
+    if (ball.x < 0) {
+      ball.x = 780;
+    }
+    if (ball.y > 480) {
+      ball.y = 0;
+    }
+    if (ball.y < 0) {
+      ball.y = 480;
+    }
+    // draw the snake
+
+    ctx.fillRect(ball.x, ball.y, 19, 19);
   }
-  if (ball.y > 480) {
-    ball.y = 0;
-  }
-  if (ball.y < 0) {
-    ball.y = 480;
-  }
- 
-  
+  // draw the food
+
+  ctx.fillRect(food.x * 20, food.y * 20, 19, 19);
 }
 
-setInterval(game,250) 
-
+setInterval(game, 250);
