@@ -5,7 +5,7 @@ var highscore = document.getElementById("highscore");
 var ctx = canvas.getContext("2d");
 var direction, snake, score, food;
 
-// Create  Snake Direction
+// listen to keyboard events to move the snake
 
 document.addEventListener("keydown", direction);
 
@@ -57,12 +57,23 @@ function add() {
   if (direction == "UP") {
     snake.push({ x: lastball.x, y: lastball.y - 20 });
   }
+} 
+
+// How the snake eat the food
+function eatFood(){
+  var lastball = snake[snake.length - 1];
+  if (lastball.x == food.x * 20 && lastball.y == food.y * 20) {
+    score++;
+    add();
+    createFood();
+  }
 }
 
 function game() {
   ctx.clearRect(0, 0, 888, 555);
   snake.shift();
   add();
+  eatFood();
 
   for (var i = 0; i < snake.length; i++) {
     ball = snake[i];
@@ -93,5 +104,6 @@ function game() {
 
   ctx.fillRect(food.x * 20, food.y * 20, 19, 19);
 }
+// start the game
 
 setInterval(game, 250);
