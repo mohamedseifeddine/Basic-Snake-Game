@@ -5,7 +5,7 @@ var highscore = document.getElementById("highscore");
 var ctx = canvas.getContext("2d");
 var direction, snake, score, food; 
 let allScore = [];
-
+let allHighScore = [];
 
 // load audio files
 
@@ -86,7 +86,7 @@ function add() {
 
 function eatFood() {
   var lastball = snake[snake.length - 1];
-  if (lastball.x == food.x * 20 && lastball.y == food.y * 20) {
+  if (lastball.x == food.x * 20  && lastball.y  == food.y*20 ) {
     eat.play()
     score++;
     add();
@@ -106,7 +106,7 @@ function game() {
     if (i == snake.length - 1) {
       ctx.fillStyle = "lightgreen";
     } else {
-      ctx.fillStyle = "#ff0000";
+      ctx.fillStyle = "#ffa500";
     }
 
     if (ball.x > 780) {
@@ -128,15 +128,15 @@ function game() {
       dead.play()
       alert(" Game Over  Try again " + score);
 
-       // Calculate The High Score
+       // Calculate The Current High Score
 
       localStorage.setItem("score", score);
       var currentScore = Math.max([localStorage].map(x => x.score));
       allScore.push(currentScore);
       let bestScore = Math.max(...allScore);
-      localStorage.setItem("bestscore", bestScore);
+      highscore.innerHTML = `${bestScore}`
 
-      highscore.innerHTML = ` ${bestScore} `;
+    
       init();
     }
 

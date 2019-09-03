@@ -3,11 +3,12 @@ display: flex;
 width: 1200px;
 margin-top: 60px;
 justify-content: center;
-background-image: url("/images/background-greywhite.jpg");
 
 }
 #myCanvas {
-  background-image: url("/images/background.jpeg");
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzmiFY2jdE6gSYoTE1xos39-pAxGMSx_PhZf4XOifOo84GETljA");
+  background-size:cover 
+  
  
 }
 #highscore {
@@ -21,6 +22,8 @@ fieldset {
   height: 50px;
   margin-top: 40px;
   margin-right: 55px;
+  margin-top: 200px ; 
+  font-size: 36px
 
 }
 legend {
