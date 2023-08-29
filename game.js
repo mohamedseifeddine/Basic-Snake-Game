@@ -93,7 +93,7 @@ function eatFood() {
     createFood();
   }
 }
-
+// launch game function 
 function game() {
   ctx.clearRect(0, 0, 888, 555);
   snake.shift();
